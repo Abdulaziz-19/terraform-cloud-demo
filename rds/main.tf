@@ -11,4 +11,5 @@ data "terraform_remote_state" "vpc" {
 
 resource "aws_db_subnet_group" "default" {
   name       = "project_db_subnet_group"
-  subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
+  subnet_ids = [terraform_remote_state.vpc.outputs.private_subnets]
+}
